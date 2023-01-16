@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginHorizontal: CONTENT_PADDING,
-    // alignContent: 'space-around'
   },
   dock: {
     backgroundColor: 'rgba(0,0,0,0.5)',
