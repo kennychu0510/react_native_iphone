@@ -14,16 +14,18 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { AppContainer } from '../components/AppContainer';
+import { CalendarIcon } from '../components/Apps/CalendarIcon';
 import { APP_WIDTH, CONTENT_PADDING, SCREEN_WIDTH } from '../constants';
 import { IMAGES } from '../images';
 
-type APP = {
+export type App = {
   name: string;
-  icon: ImageSourcePropType;
+  icon?: ImageSourcePropType;
+  component?: JSX.Element;
 };
-const APPS: APP[] = [
+const APPS: App[] = [
   { name: 'FaceTime', icon: IMAGES.APP_ICONS.APPLE_FACETIME },
-  { name: 'Calendar', icon: IMAGES.APP_ICONS.APPLE_CALENDAR },
+  { name: 'Calendar', component: <CalendarIcon/>},
   { name: 'Photos', icon: IMAGES.APP_ICONS.APPLE_PHOTOS },
   { name: 'Camera', icon: IMAGES.APP_ICONS.APPLE_CAMERA },
   { name: 'Mail', icon: IMAGES.APP_ICONS.APPLE_MAIL },
@@ -47,7 +49,7 @@ const APPS: APP[] = [
   { name: 'News', icon: IMAGES.APP_ICONS.APPLE_NEWS },
   { name: 'Files', icon: IMAGES.APP_ICONS.APPLE_FILES },
 ];
-const DOCK_APPS: APP[] = [
+const DOCK_APPS: App[] = [
   { name: 'Phone', icon: IMAGES.APP_ICONS.APPLE_PHONE },
   { name: 'Safari', icon: IMAGES.APP_ICONS.APPLE_SAFARI },
   { name: 'Messages', icon: IMAGES.APP_ICONS.APPLE_MESSAGES },
