@@ -65,7 +65,9 @@ export const Home = () => {
         style={{ flex: 1, width: SCREEN_WIDTH }}
         imageStyle={{ resizeMode: 'cover' }}>
         <ScrollView horizontal={true} snapToInterval={SCREEN_WIDTH}>
-          <SafeAreaView style={{ flex: 1, width: SCREEN_WIDTH }} edges={['top']}>
+          <SafeAreaView
+            style={{ flex: 1, width: SCREEN_WIDTH }}
+            edges={['top']}>
             <View style={styles.container}>
               {APPS.map((app, idx) => {
                 return <AppContainer key={idx} idx={idx} app={app} />;
@@ -85,13 +87,13 @@ export const Home = () => {
                 );
               })}
             </View>
-            <View style={styles.dock}>
-              {DOCK_APPS.map((app, idx) => {
-                return <AppContainer key={idx} idx={idx} dockIcon app={app} />;
-              })}
-            </View>
           </SafeAreaView>
         </ScrollView>
+        <View style={styles.dock}>
+          {DOCK_APPS.map((app, idx) => {
+            return <AppContainer key={idx} idx={idx} dockIcon app={app} />;
+          })}
+        </View>
       </ImageBackground>
     </Animated.View>
   );
