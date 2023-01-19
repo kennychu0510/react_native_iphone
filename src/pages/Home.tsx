@@ -15,6 +15,7 @@ import {
 } from 'react-native-safe-area-context';
 import { AppContainer } from '../components/AppContainer';
 import { CalendarIcon } from '../components/Apps/CalendarIcon';
+import { Clock } from '../components/Apps/ClockIcon';
 import { APP_WIDTH, CONTENT_PADDING, SCREEN_WIDTH } from '../constants';
 import { IMAGES } from '../images';
 
@@ -29,7 +30,7 @@ const APPS: App[] = [
   { name: 'Photos', icon: IMAGES.APP_ICONS.APPLE_PHOTOS },
   { name: 'Camera', icon: IMAGES.APP_ICONS.APPLE_CAMERA },
   { name: 'Mail', icon: IMAGES.APP_ICONS.APPLE_MAIL },
-  { name: 'Clock', icon: IMAGES.APP_ICONS.APPLE_CLOCK },
+  { name: 'Clock', component: <Clock/>},
   { name: 'Weather', icon: IMAGES.APP_ICONS.APPLE_WEATHER },
   { name: 'Reminders', icon: IMAGES.APP_ICONS.APPLE_REMINDERS },
   { name: 'Notes', icon: IMAGES.APP_ICONS.APPLE_NOTES },

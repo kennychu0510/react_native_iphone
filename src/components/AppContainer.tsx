@@ -24,7 +24,7 @@ export const AppContainer = (props: Props) => {
     return app.component
   }
   return (
-    <View style={[dockIcon ? null : {marginBottom: 20}, styles.container]}>
+    <View style={[dockIcon ? null : {marginBottom: 15}, styles.container]}>
       {app ? (
         <Image
           source={app.icon}
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    marginTop: 3,
+    marginTop: 5,
   },
   container: {
     width: (SCREEN_WIDTH - CONTENT_PADDING * 2) / 4,
