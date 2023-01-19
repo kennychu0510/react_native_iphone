@@ -26,11 +26,11 @@ export type App = {
 };
 const APPS: App[] = [
   { name: 'FaceTime', icon: IMAGES.APP_ICONS.APPLE_FACETIME },
-  { name: 'Calendar', component: <CalendarIcon/>},
+  { name: 'Calendar', component: <CalendarIcon /> },
   { name: 'Photos', icon: IMAGES.APP_ICONS.APPLE_PHOTOS },
   { name: 'Camera', icon: IMAGES.APP_ICONS.APPLE_CAMERA },
   { name: 'Mail', icon: IMAGES.APP_ICONS.APPLE_MAIL },
-  { name: 'Clock', component: <Clock/>},
+  { name: 'Clock', component: <Clock /> },
   { name: 'Weather', icon: IMAGES.APP_ICONS.APPLE_WEATHER },
   { name: 'Reminders', icon: IMAGES.APP_ICONS.APPLE_REMINDERS },
   { name: 'Notes', icon: IMAGES.APP_ICONS.APPLE_NOTES },
@@ -42,7 +42,7 @@ const APPS: App[] = [
   { name: 'Health', icon: IMAGES.APP_ICONS.APPLE_HEALTH },
   { name: 'Home', icon: IMAGES.APP_ICONS.APPLE_HOME },
   { name: 'Podcasts', icon: IMAGES.APP_ICONS.APPLE_PODCASTS },
-  { name: 'Safari', icon: IMAGES.APP_ICONS.APPLE_SAFARI },
+  { name: 'Find My', icon: IMAGES.APP_ICONS.APPLE_FIND_MY },
   { name: 'Stocks', icon: IMAGES.APP_ICONS.APPLE_STOCKS },
   { name: 'WhatsApp', icon: IMAGES.APP_ICONS.WHATSAPP },
   { name: 'Translate', icon: IMAGES.APP_ICONS.APPLE_TRANSLATE },
