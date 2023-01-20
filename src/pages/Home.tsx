@@ -16,6 +16,7 @@ import {
 import { AppContainer } from '../components/AppContainer';
 import { CalendarIcon } from '../components/Apps/CalendarIcon';
 import { Clock } from '../components/Apps/ClockIcon';
+import { AssistiveTouch } from '../components/AssistiveTouch';
 import { APP_WIDTH, CONTENT_PADDING, SCREEN_WIDTH } from '../constants';
 import { IMAGES } from '../images';
 
@@ -97,6 +98,7 @@ export const Home = () => {
             return <AppContainer key={idx} idx={idx} dockIcon app={app} />;
           })}
         </View>
+        <AssistiveTouch />
       </ImageBackground>
     </Animated.View>
   );
