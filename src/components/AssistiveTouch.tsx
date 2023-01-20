@@ -51,14 +51,6 @@ export const AssistiveTouch = () => {
 
   const rStyle = useAnimatedStyle(() => {
     return {
-      // transform: [
-      //   {
-      //     translateX: translateX.value,
-      //   },
-      //   {
-      //     translateY: translateY.value,
-      //   },
-      // ],
       left: positionX.value,
       top: positionY.value,
     };
