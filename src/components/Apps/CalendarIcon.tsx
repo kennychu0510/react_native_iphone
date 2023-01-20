@@ -4,7 +4,7 @@ import { APP_WIDTH, CONTENT_PADDING, SCREEN_WIDTH } from '../../constants';
 import { App } from '../../pages/Home';
 
 function getDayOfWeek(): string {
-  const today = new Date().getDay()
+  const today = new Date().getDay();
   const map = new Map<number, string>([
     [0, 'SUN'],
     [1, 'MON'],
@@ -13,8 +13,8 @@ function getDayOfWeek(): string {
     [4, 'THU'],
     [5, 'FRI'],
     [6, 'SAT'],
-  ])
-  return map.get(today) || 'ERROR'
+  ]);
+  return map.get(today) || 'ERROR';
 }
 
 export const CalendarIcon = () => {
@@ -39,9 +39,10 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'center',
     marginTop: 5,
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '500',
-    letterSpacing: 0.5
+    letterSpacing: 0.5,
+    marginBottom: -2,
   },
   content: {
     borderRadius: 15,
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 34,
     textAlign: 'center',
-    fontWeight: '300'
+    fontWeight: '300',
   },
   title: {
     color: 'white',
