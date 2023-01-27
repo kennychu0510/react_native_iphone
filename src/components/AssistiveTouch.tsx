@@ -21,8 +21,8 @@ type ContextInterface = {
 };
 
 export const AssistiveTouch = () => {
-  const positionX = useSharedValue(0);
-  const positionY = useSharedValue(0);
+  const positionX = useSharedValue(0.85 * SCREEN_WIDTH);
+  const positionY = useSharedValue(0.7 * SCREEN_HEIGHT);
   const ref = useAnimatedRef();
 
   const panGestureEvent = useAnimatedGestureHandler<

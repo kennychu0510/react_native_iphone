@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ImageBackground,
   ImageSourcePropType,
+  Modal,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   View,
+  Animated as RNAnimated,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  FadeIn,
+  useAnimatedStyle,
+  useSharedValue,
+  withDecay,
+  withSpring,
+  withTiming,
+  ZoomIn,
+} from 'react-native-reanimated';
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -17,7 +30,12 @@ import { AppContainer } from '../components/AppContainer';
 import { CalendarIcon } from '../components/Apps/CalendarIcon';
 import { Clock } from '../components/Apps/ClockIcon';
 import { AssistiveTouch } from '../components/AssistiveTouch';
-import { APP_WIDTH, CONTENT_PADDING, SCREEN_WIDTH } from '../constants';
+import {
+  APP_WIDTH,
+  CONTENT_PADDING,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from '../constants';
 import { IMAGES } from '../images';
 
 export type App = {
@@ -60,6 +78,40 @@ const DOCK_APPS: App[] = [
 const PAGES = [null];
 export const Home = () => {
   const insets = useSafeAreaInsets();
+  const [clickedAppPosition, setClickedAppPosition] = useState<null | {
+    pageX: number;
+    pageY: number;
+  }>(null);
+  const appOpeningScale = useRef(new RNAnimated.Value(1)).current;
+  const appOpeningScaleRA = useSharedValue(1);
+
+  useEffect(() => {
+    if (!clickedAppPosition) return;
+
+    RNAnimated.timing(appOpeningScale, {
+      toValue: 30,
+      useNativeDriver: true,
+      duration: 500,
+    }).start();
+
+    appOpeningScaleRA.value = withTiming(30, {
+      duration: 800,
+      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+    });
+  }, [clickedAppPosition]);
+
+  function resetAppOpeningAnimation() {
+    setClickedAppPosition(null);
+    appOpeningScale.setValue(1);
+    appOpeningScaleRA.value = 1;
+  }
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: appOpeningScaleRA.value }],
+    };
+  });
+
   return (
     <Animated.View
       style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -74,7 +126,14 @@ export const Home = () => {
             edges={['top']}>
             <View style={styles.container}>
               {APPS.map((app, idx) => {
-                return <AppContainer key={idx} idx={idx} app={app} />;
+                return (
+                  <AppContainer
+                    key={idx}
+                    idx={idx}
+                    app={app}
+                    setPos={setClickedAppPosition}
+                  />
+                );
               })}
             </View>
             <View style={styles.pageIndicator}>
@@ -95,10 +154,52 @@ export const Home = () => {
         </ScrollView>
         <View style={styles.dock}>
           {DOCK_APPS.map((app, idx) => {
-            return <AppContainer key={idx} idx={idx} dockIcon app={app} />;
+            return (
+              <AppContainer
+                key={idx}
+                idx={idx}
+                dockIcon
+                app={app}
+                setPos={setClickedAppPosition}
+              />
+            );
           })}
         </View>
         <AssistiveTouch />
+        {/* <Modal visible={!!clickedAppPosition} transparent={true}>
+          <TouchableWithoutFeedback onPress={resetAppOpeningAnimation}>
+            <RNAnimated.View
+              style={{
+                position: 'absolute',
+                left: clickedAppPosition?.pageX,
+                top: clickedAppPosition?.pageY,
+                backgroundColor: 'black',
+                height: APP_WIDTH * 0.8,
+                aspectRatio: 1,
+                transform: [
+                  {
+                    scale: appOpeningScale,
+                  },
+                ],
+              }}></RNAnimated.View>
+          </TouchableWithoutFeedback>
+        </Modal> */}
+        <Modal visible={!!clickedAppPosition} transparent={true}>
+          <TouchableWithoutFeedback onPress={resetAppOpeningAnimation}>
+            <Animated.View
+              style={[
+                {
+                  position: 'absolute',
+                  left: clickedAppPosition?.pageX,
+                  top: clickedAppPosition?.pageY,
+                  backgroundColor: 'black',
+                  height: APP_WIDTH,
+                  aspectRatio: 1,
+                },
+                animatedStyles,
+              ]}></Animated.View>
+          </TouchableWithoutFeedback>
+        </Modal>
       </ImageBackground>
     </Animated.View>
   );
