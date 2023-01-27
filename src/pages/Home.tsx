@@ -1,4 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   ImageBackground,
   ImageSourcePropType,
@@ -26,6 +33,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import { RootStackParamList } from '../../App';
 import { AppContainer } from '../components/AppContainer';
 import { CalendarIcon } from '../components/Apps/CalendarIcon';
 import { Clock } from '../components/Apps/ClockIcon';
@@ -37,6 +45,8 @@ import {
   SCREEN_WIDTH,
 } from '../constants';
 import { IMAGES } from '../images';
+
+export type RootScreenNavigationProp = NavigationProp<RootStackParamList>;
 
 export type App = {
   name: string;
@@ -84,9 +94,15 @@ export const Home = () => {
   }>(null);
   const appOpeningScale = useRef(new RNAnimated.Value(1)).current;
   const appOpeningScaleRA = useSharedValue(1);
+  const navigation = useNavigation<RootScreenNavigationProp>();
 
   useEffect(() => {
     if (!clickedAppPosition) return;
+
+    const timer = setTimeout(() => {
+      navigation.navigate('Settings');
+      resetAppOpeningAnimation();
+    }, 500);
 
     RNAnimated.timing(appOpeningScale, {
       toValue: 30,
@@ -98,6 +114,10 @@ export const Home = () => {
       duration: 800,
       easing: Easing.bezier(0.25, 0.1, 0.25, 1),
     });
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [clickedAppPosition]);
 
   function resetAppOpeningAnimation() {
